@@ -4,13 +4,13 @@ import 'firebase/firestore';
 import { Game } from '../types/game';
 import { Player } from '../types/player';
 const firebaseConfig = {
-  apiKey: 'AIzaSyDynbX3QT9x8e8qMtTsD6vnVMD6wHXe4Ug',
-  authDomain: 'planning-poker-b946f.firebaseapp.com',
-  projectId: 'planning-poker-b946f',
-  storageBucket: 'planning-poker-b946f.appspot.com',
-  messagingSenderId: '905950444049',
-  appId: '1:905950444049:web:e3e56171532bfe47b20fb0',
-  measurementId: 'G-LEK1503CC0',
+  apiKey: "AIzaSyDn4fgN07Q1WZ0jZhllzTuD8FrDHTqB1MM",
+  authDomain: "simple-edecd.firebaseapp.com",
+  databaseURL: "https://simple-edecd.firebaseio.com",
+  projectId: "simple-edecd",
+  storageBucket: "simple-edecd.appspot.com",
+  messagingSenderId: "44546038252",
+  appId: "1:44546038252:web:56fb6e88d58cdcb7ee88c9"
 };
 
 // Initialize Firebase
@@ -20,6 +20,8 @@ const playersCollectionName = 'players';
 const db = firebase.firestore();
 
 export const addGameToStore = async (gameId: string, data: any) => {
+  console.log('Database')
+  console.log('Database: ' + db)
   await db.collection(gamesCollectionName).doc(gameId).set(data);
   return true;
 };
