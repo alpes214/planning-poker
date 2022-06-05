@@ -6,7 +6,11 @@ import {
   getPlayersFromStore,
   updatePlayerInStore,
 } from '../repository/firebase';
-import { getPlayerGamesFromCache, isGameInPlayerCache, updatePlayerGamesInCache } from '../repository/localStorage';
+import {
+  getPlayerGamesFromCache,
+  isGameInPlayerCache,
+  updatePlayerGamesInCache,
+} from '../repository/localStorage';
 import { Game } from '../types/game';
 import { Player, PlayerGame } from '../types/player';
 import { Status } from '../types/status';
@@ -19,7 +23,12 @@ export const addPlayer = async (gameId: string, player: Player) => {
   }
 };
 
-export const updatePlayerValue = async (gameId: string, playerId: string, value: number, randomEmoji: string) => {
+export const updatePlayerValue = async (
+  gameId: string,
+  playerId: string,
+  value: number,
+  randomEmoji: string
+) => {
   const player = await getPlayerFromStore(gameId, playerId);
 
   if (player) {
@@ -61,17 +70,28 @@ export const getCurrentPlayerId = (gameId: string): string | undefined => {
 
 export const updatePlayerGames = (gameId: string, playerId: string) => {
   let playerGames: PlayerGame[] = getPlayerGamesFromCache();
+  let found = false;
 
-  playerGames.push({ gameId, playerId });
+  playerGames.forEach((el) => {
+    if (el.playerId === playerId) {
+      found = true;
+    }
+  });
 
-  updatePlayerGamesInCache(playerGames);
+  if (!found) {
+    playerGames.push({ gameId, playerId });
+    updatePlayerGamesInCache(playerGames);
+  }
 };
 
 export const isCurrentPlayerInGame = (gameId: string): boolean => {
   return isGameInPlayerCache(gameId);
 };
 
-export const addPlayerToGame = async (gameId: string, playerName: string): Promise<boolean> => {
+export const addPlayerToGame = async (
+  gameId: string,
+  playerName: string
+): Promise<boolean> => {
   const joiningGame = await getGameFromStore(gameId);
 
   if (!joiningGame) {

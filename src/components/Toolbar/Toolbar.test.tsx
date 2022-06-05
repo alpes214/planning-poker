@@ -68,12 +68,4 @@ describe('Toolbar component', () => {
     });
     expect(mockHistoryPush).toBeCalledWith('/');
   });
-  it('should navigate to github page when Github icon is clicked clicked', () => {
-    const toolbar = render(<Toolbar />);
-    const title = toolbar.container.querySelector('#github-button') as HTMLElement;
-    act(() => {
-      userEvent.click(title);
-    });
-    expect(window.location.href).toEqual('https://github.com/hellomuthu23/planning-poker');
-  });
 });

@@ -21,7 +21,7 @@ describe('RecentGames component', () => {
   });
   it('should display recent games when games found in local storage', async () => {
     const mockGames: Game[] = [
-      { id: 'abv', name: 'avengers', createdBy: 'IronMan' },
+      { id: 'abv', name: 'core', createdBy: 'IronMan' },
       { id: 'xyz', name: 'endgame', createdBy: 'SpiderMan' },
     ] as Game[];
     jest.spyOn(playersService, 'getPlayerRecentGames').mockResolvedValue(mockGames);
@@ -40,7 +40,7 @@ describe('RecentGames component', () => {
 
   it('should navigate to the game when clicking on game', async () => {
     const mockGames: Game[] = [
-      { id: 'abc', name: 'avengers', createdBy: 'IronMan' },
+      { id: 'abc', name: 'core', createdBy: 'IronMan' },
       { id: 'xyz', name: 'endgame', createdBy: 'SpiderMan' },
     ] as Game[];
     jest.spyOn(playersService, 'getPlayerRecentGames').mockResolvedValue(mockGames);
