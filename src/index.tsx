@@ -5,7 +5,10 @@ import './index.css';
 import './styles/styles.css'
 import reportWebVitals from './reportWebVitals';
 import './service/analytics';
-ReactDOM.render(<App/>, document.getElementById('root'));
+import { AuthProvider } from "./provider/AuthProvider";
+
+
+ReactDOM.render(<App />,document.getElementById("root"));
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
