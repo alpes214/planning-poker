@@ -8,10 +8,9 @@ import { Toolbar } from './components/Toolbar/Toolbar';
 import { GamePage } from './pages/GamePage/GamePage';
 import HomePage from './pages/HomePage/HomePage';
 import { theme } from './service/theme';
-import { getAuth, GoogleAuthProvider, signInWithPopup } from '@firebase/auth';
 
-import firebase from "firebase/app";
-import "firebase/auth";
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
 
 const sd = firebase.SDK_VERSION;
 

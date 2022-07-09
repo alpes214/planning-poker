@@ -1,16 +1,19 @@
-import 'firebase/analytics';
-import firebase from 'firebase/app';
-import 'firebase/firestore';
+import 'firebase/compat/analytics';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/firestore';
 import { Game } from '../types/game';
 import { Player } from '../types/player';
+import "firebase/compat/auth";
+
 const firebaseConfig = {
-  apiKey: "AIzaSyDn4fgN07Q1WZ0jZhllzTuD8FrDHTqB1MM",
-  authDomain: "simple-edecd.firebaseapp.com",
-  databaseURL: "https://simple-edecd.firebaseio.com",
-  projectId: "simple-edecd",
-  storageBucket: "simple-edecd.appspot.com",
-  messagingSenderId: "44546038252",
-  appId: "1:44546038252:web:56fb6e88d58cdcb7ee88c9"
+  apiKey: "AIzaSyDDEeDC5sEDK_rzNd-HTZvpzsCDsK-DYh0",
+  authDomain: "simple-dev-46629.firebaseapp.com",
+  databaseURL: "https://simple-dev-46629.firebaseio.com",
+  projectId: "simple-dev-46629",
+  storageBucket: "simple-dev-46629.appspot.com",
+  messagingSenderId: "90573150745",
+  appId: "1:90573150745:web:59c2ebcfe22b36e251e888",
+  measurementId: "G-HRNMK9H1KB"
 };
 
 // Initialize Firebase
