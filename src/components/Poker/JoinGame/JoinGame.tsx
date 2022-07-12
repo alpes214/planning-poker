@@ -9,6 +9,7 @@ import {
 } from '@material-ui/core';
 import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
+import { getPlayersFromStore } from '../../../repository/firebase';
 import { getGame } from '../../../service/games';
 import {
   addPlayerToGame,
@@ -23,6 +24,7 @@ export const JoinGame = () => {
   const [joinGameId, setJoinGameId] = useState(id);
   const [playerName, setPlayerName] = useState('');
   const [gameFound, setIsGameFound] = useState(true);
+  const [playerFound, setIsPlayerFound] = useState(true);
 
   useEffect(() => {
     async function fetchData() {
@@ -41,10 +43,21 @@ export const JoinGame = () => {
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
     if (joinGameId) {
+      const players = await getPlayersFromStore(joinGameId);
+
+      let playerFound = false;
+      players.forEach((player) => {
+        if (player.name === playerName) {
+          console.log('Player exists');
+          setIsPlayerFound(true);
+          playerFound = true;
+        }
+      });
+      
       const res = await addPlayerToGame(joinGameId, playerName);
 
       setIsGameFound(res);
-      if (res) {
+      if (res && !playerFound) {
         history.push(`/game/${joinGameId}`);
       }
     }
@@ -76,6 +89,8 @@ export const JoinGame = () => {
                 }
               />
               <TextField
+                error={playerFound}
+                helperText={playerFound && 'Player with this name already joined game. Use diffe'}
                 className='JoinGameTextField'
                 required
                 id='filled-required'

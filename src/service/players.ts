@@ -94,8 +94,22 @@ export const addPlayerToGame = async (
 ): Promise<boolean> => {
   const joiningGame = await getGameFromStore(gameId);
 
+  const players = await getPlayersFromStore(gameId);
+
+  let playerFound = false;
+  players.forEach((player) => {
+    if (player.name === playerName) {
+      playerFound = true;
+    }
+  });
+
   if (!joiningGame) {
     console.log('Game not found');
+    return false;
+  }
+
+  if (playerFound) {
+    console.log('Player exists');
     return false;
   }
   const newPlayer = { name: playerName, id: ulid(), status: Status.NotStarted };
