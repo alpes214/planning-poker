@@ -63,6 +63,10 @@ export const getPlayerRecentGames = async (): Promise<Game[]> => {
 export const getCurrentPlayerId = (gameId: string): string | undefined => {
   let playerGames: PlayerGame[] = getPlayerGamesFromCache();
 
+  playerGames.forEach((g) => {
+    console.log(`TRACE : game ${JSON.stringify(g)}`)
+  })
+
   const game = playerGames.find((playerGame) => playerGame.gameId === gameId);
 
   return game && game.playerId;
@@ -110,7 +114,7 @@ export const addPlayerToGame = async (
 
   if (playerFound) {
     console.log('Player exists');
-    return false;
+    return true;
   }
   const newPlayer = { name: playerName, id: ulid(), status: Status.NotStarted };
 

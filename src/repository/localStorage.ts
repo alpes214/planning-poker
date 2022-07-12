@@ -5,7 +5,7 @@ const playerGamesStoreName = 'playerGames';
 export const getPlayerGamesFromCache = (): PlayerGame[] => {
   let playerGames: PlayerGame[] = [];
 
-  const store = localStorage.getItem(playerGamesStoreName);
+  const store = sessionStorage.getItem(playerGamesStoreName);
   if (store) {
     playerGames = JSON.parse(store);
   }
@@ -25,5 +25,5 @@ export const isGameInPlayerCache = (gameId: string): boolean => {
 };
 
 export const updatePlayerGamesInCache = (playerGames: PlayerGame[]) => {
-  localStorage.setItem(playerGamesStoreName, JSON.stringify(playerGames));
+  sessionStorage.setItem(playerGamesStoreName, JSON.stringify(playerGames));
 };

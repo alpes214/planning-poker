@@ -24,21 +24,8 @@ export const JoinGame = () => {
   const [joinGameId, setJoinGameId] = useState(id);
   const [playerName, setPlayerName] = useState('');
   const [gameFound, setIsGameFound] = useState(true);
-  const [playerFound, setIsPlayerFound] = useState(true);
+  const [playerFound, setIsPlayerFound] = useState(false);
 
-  useEffect(() => {
-    async function fetchData() {
-      if (joinGameId) {
-        if (await getGame(joinGameId)) {
-          setIsGameFound(true);
-          if (isCurrentPlayerInGame(joinGameId)) {
-            history.push(`/game/${joinGameId}`);
-          }
-        }
-      }
-    }
-    fetchData();
-  }, [joinGameId, history]);
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
@@ -90,7 +77,7 @@ export const JoinGame = () => {
               />
               <TextField
                 error={playerFound}
-                helperText={playerFound && 'Player with this name already joined game. Use diffe'}
+                helperText={playerFound && 'Player with this name already joined game.'}
                 className='JoinGameTextField'
                 required
                 id='filled-required'
