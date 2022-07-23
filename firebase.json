@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "hosting": [
     {
       "target": "prod",
@@ -32,3 +33,21 @@
     }
   ]
 }
+=======
+  "hosting": {
+    "site": "simple-edecd",
+    "public": "build",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
+>>>>>>> master
