@@ -1,5 +1,17 @@
 {
   "projects": {
     "default": "simple-edecd"
+  },
+  "targets": {
+    "simple-dev-46629": {
+      "hosting": {
+        "dev": [
+          "simple-dev-46629"
+        ],
+        "prod": [
+          "simple-edecd"
+        ]
+      }
+    }
   }
 }
