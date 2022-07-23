@@ -10,7 +10,6 @@ import { getCards } from './CardConfigs';
 import { CardPicker } from './CardPicker';
 import * as cardConfigs from './CardConfigs';
 
-jest.mock('../../../service/players');
 describe('CardPicker component', () => {
   const mockGame: Game = {
     id: 'xyz',

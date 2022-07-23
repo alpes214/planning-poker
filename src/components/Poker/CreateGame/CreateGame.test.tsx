@@ -38,7 +38,7 @@ describe('CreateGame component', () => {
     expect(gamesService.addNewGame).toHaveBeenCalled();
 
     expect(gamesService.addNewGame).toHaveBeenCalledWith(
-      expect.objectContaining({ createdBy: 'SuperHeroRock', gameType: 'Fibonacci', name: 'AvengersMarvels' })
+      expect.objectContaining({ createdBy: 'SuperHeroRock', gameType: 'Fibonacci', name: 'CoreMarvels' })
     );
   });
   it('should be able to create new session of TShirt Sizing', async () => {
@@ -58,7 +58,7 @@ describe('CreateGame component', () => {
     expect(gamesService.addNewGame).toHaveBeenCalled();
 
     expect(gamesService.addNewGame).toHaveBeenCalledWith(
-      expect.objectContaining({ createdBy: 'SuperHeroRock', gameType: 'TShirt', name: 'AvengersMarvels' })
+      expect.objectContaining({ createdBy: 'SuperHeroRock', gameType: 'TShirt', name: 'CoreMarvels' })
     );
   });
   it('should be able to create new session of Short Fibonacci Sizing', async () => {
@@ -78,7 +78,7 @@ describe('CreateGame component', () => {
     expect(gamesService.addNewGame).toHaveBeenCalled();
 
     expect(gamesService.addNewGame).toHaveBeenCalledWith(
-      expect.objectContaining({ createdBy: 'SuperHeroRock', gameType: 'ShortFibonacci', name: 'AvengersMarvels' })
+      expect.objectContaining({ createdBy: 'SuperHeroRock', gameType: 'ShortFibonacci', name: 'CoreMarvels' })
     );
   });
 });

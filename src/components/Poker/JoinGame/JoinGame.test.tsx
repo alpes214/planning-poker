@@ -7,9 +7,23 @@ import * as playersService from '../../../service/players';
 import { Game } from '../../../types/game';
 import { JoinGame } from './JoinGame';
 
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
+
 jest.mock('../../../service/players');
 jest.mock('../../../service/games');
 const mockHistoryPush = jest.fn();
+
+jest.mock('firebase', () => {
+  const auth = jest.fn();
+  const mAuth = { signInWithPopup: jest.fn() };
+  // @ts-ignore
+  auth.GoogleAuthProvider = jest.fn();
+  // @ts-ignore
+  auth.Auth = jest.fn(() => mAuth);
+  return { auth };
+});
+
 describe('JoinGame component', () => {
   beforeEach(() => {
     jest.spyOn(reactRouter, 'useHistory').mockReturnValue({ push: mockHistoryPush } as any);

@@ -14,7 +14,9 @@ import "firebase/compat/auth";
 
 const sd = firebase.SDK_VERSION;
 
+
 function App() {
+
   const user = useContext(AuthContext);
   // const provider = new GoogleAuthProvider();
   var provider = new firebase.auth.GoogleAuthProvider();
@@ -42,8 +44,6 @@ function App() {
     // ...
   });
   
-  console.log(user)
-  console.log(user?.email)
   return (
     <div className="LightTheme">
     <ThemeProvider theme={theme} >
