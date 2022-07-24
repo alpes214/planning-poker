@@ -1,6 +1,5 @@
 {
   "hosting": {
-    "site": "simple-edecd",
     "public": "build",
     "ignore": [
       "firebase.json",

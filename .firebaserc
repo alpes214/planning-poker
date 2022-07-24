@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "simple-edecd"
-  }
+    "default": "simple-dev-46629",
+    "prod": "simple-edecd",
+    "staging": "simple-dev-46629"
+  },
+  "targets": {}
 }
