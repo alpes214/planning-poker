@@ -17,32 +17,32 @@ const sd = firebase.SDK_VERSION;
 
 function App() {
 
-  const user = useContext(AuthContext);
-  // const provider = new GoogleAuthProvider();
-  var provider = new firebase.auth.GoogleAuthProvider();
-  firebase.auth()
-  .signInWithPopup(provider)
-  .then((result) => {
-    /** @type {firebase.auth.OAuthCredential} */
-    var credential = result.credential;
+  // const user = useContext(AuthContext);
+  // // const provider = new GoogleAuthProvider();
+  // var provider = new firebase.auth.GoogleAuthProvider();
+  // firebase.auth()
+  // .signInWithPopup(provider)
+  // .then((result) => {
+  //   /** @type {firebase.auth.OAuthCredential} */
+  //   var credential = result.credential;
 
-    // This gives you a Google Access Token. You can use it to access the Google API.
-    // var token = credential?.accessToken;
-    // The signed-in user info.
-    var user = result.user;
-    console.log(`SUCCESS ${JSON.stringify(user)}`)
-    // ...
-  }).catch((error) => {
-    console.log(`ERROR ${error.message}`)
-    // Handle Errors here.
-    var errorCode = error.code;
-    var errorMessage = error.message;
-    // The email of the user's account used.
-    var email = error.email;
-    // The firebase.auth.AuthCredential type that was used.
-    var credential = error.credential;
-    // ...
-  });
+  //   // This gives you a Google Access Token. You can use it to access the Google API.
+  //   // var token = credential?.accessToken;
+  //   // The signed-in user info.
+  //   var user = result.user;
+  //   console.log(`SUCCESS ${JSON.stringify(user)}`)
+  //   // ...
+  // }).catch((error) => {
+  //   console.log(`ERROR ${error.message}`)
+  //   // Handle Errors here.
+  //   var errorCode = error.code;
+  //   var errorMessage = error.message;
+  //   // The email of the user's account used.
+  //   var email = error.email;
+  //   // The firebase.auth.AuthCredential type that was used.
+  //   var credential = error.credential;
+  //   // ...
+  // });
   
   return (
     <div className="LightTheme">
