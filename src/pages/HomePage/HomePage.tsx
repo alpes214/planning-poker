@@ -8,7 +8,7 @@ import { RecentGames } from '../../components/Poker/RecentGames/RecentGames';
 import LandingImage from './../../images/background.jpg';
 import './HomePage.css';
 
-export const HomePage = () => {
+export const HomePage = (props: any) => {
   const isJoin = useRouteMatch('/join');
   const isSmallScreen = useMediaQuery((theme: any) => theme.breakpoints.down('xs'));
 
@@ -30,7 +30,7 @@ export const HomePage = () => {
             </Slide>
           </Grid>
           <Grid item sm={12} lg={6}>
-            <div className='HomePageContainer'>{isJoin ? <JoinGame /> : <CreateGame />}</div>
+            <div className='HomePageContainer'>{isJoin ? <JoinGame palyerName={props?.playerName} setPlayerName={props?.setPlayerName} joinGameId={props?.joinGameId} setJoinGameId={props?.setJoinGameId}/> : <CreateGame />}</div>
           </Grid>
         </Grid>
         <Grid container item sm={12} lg={9} justify='center' alignItems='center' spacing={3}>

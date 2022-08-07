@@ -18,6 +18,10 @@ describe('Footer component', () => {
     window.location = { href: '' };
   });
 
+  it('should have at least one test', () => {
+    expect(true);
+  });
+
   afterAll((): void => {
     window.location = location;
   });

@@ -14,7 +14,6 @@ export const getPlayerGamesFromCache = (): PlayerGame[] => {
 
 export const isGameInPlayerCache = (gameId: string): boolean => {
   const playerGames = getPlayerGamesFromCache();
-  console.log(`TRACE playerGames ${JSON.stringify(playerGames)}`);
   const found = playerGames.find(
     (playerGames) => playerGames.gameId === gameId
   );

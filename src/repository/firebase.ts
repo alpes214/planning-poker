@@ -62,6 +62,7 @@ export const getPlayerFromStore = async (gameId: string, playerId: string): Prom
 export const streamData = (id: string) => {
   return db.collection(gamesCollectionName).doc(id);
 };
+
 export const streamPlayersFromStore = (id: string) => {
   return db.collection(gamesCollectionName).doc(id).collection(playersCollectionName);
 };
@@ -74,6 +75,11 @@ export const updateGameDataInStore = async (gameId: string, data: any): Promise<
 
 export const addPlayerToGameInStore = async (gameId: string, player: Player) => {
   await db.collection(gamesCollectionName).doc(gameId).collection(playersCollectionName).doc(player.id).set(player);
+  return true;
+};
+
+export const deletePlayerFromGameInStore = async (gameId: string, player: Player) => {
+  await db.collection(gamesCollectionName).doc(gameId).collection(playersCollectionName).doc(player.id).delete()
   return true;
 };
 

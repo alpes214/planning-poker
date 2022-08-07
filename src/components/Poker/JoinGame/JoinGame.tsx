@@ -7,25 +7,31 @@ import {
   Grow,
   TextField,
 } from '@material-ui/core';
-import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { getPlayersFromStore } from '../../../repository/firebase';
-import { getGame } from '../../../service/games';
 import {
   addPlayerToGame,
-  isCurrentPlayerInGame,
 } from '../../../service/players';
 import './JoinGame.css';
 
-export const JoinGame = () => {
+
+export const JoinGame = (props: any) => {
   const history = useHistory();
   let { id } = useParams<{ id: string }>();
 
-  const [joinGameId, setJoinGameId] = useState(id);
-  const [playerName, setPlayerName] = useState('');
   const [gameFound, setIsGameFound] = useState(true);
   const [playerFound, setIsPlayerFound] = useState(false);
 
+  let playerName = props['playerName'];
+  let setPlayerName = props['setPlayerName'];
+
+  let joinGameId = props['joinGameId'];
+  let setJoinGameId = props['setJoinGameId'];
+
+  if (typeof setJoinGameId === 'function') {
+    setJoinGameId(id);
+  }
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
@@ -40,7 +46,6 @@ export const JoinGame = () => {
           playerFound = true;
         }
       });
-      
       const res = await addPlayerToGame(joinGameId, playerName);
 
       setIsGameFound(res);
@@ -69,10 +74,13 @@ export const JoinGame = () => {
                 id='filled-required'
                 label='Session ID'
                 placeholder='xyz...'
-                defaultValue={joinGameId}
+                defaultValue={id}
                 variant='outlined'
-                onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                  setJoinGameId(event.target.value)
+                onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                  if (typeof setJoinGameId === 'function') {
+                    setJoinGameId(id);
+                  }
+                }
                 }
               />
               <TextField
@@ -85,9 +93,12 @@ export const JoinGame = () => {
                 placeholder='Enter your name'
                 defaultValue={playerName}
                 variant='outlined'
-                onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                  setPlayerName(event.target.value)
+                onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                  if (typeof setPlayerName === 'function') {
+                    setPlayerName(event.target.value)
+                  }
                 }
+              }
               />
             </CardContent>
             <CardActions className='JoinGameCardAction'>

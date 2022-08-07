@@ -1,6 +1,7 @@
 import { ulid } from 'ulid';
 import {
   addPlayerToGameInStore,
+  deletePlayerFromGameInStore,
   getGameFromStore,
   getPlayerFromStore,
   getPlayersFromStore,
@@ -63,10 +64,6 @@ export const getPlayerRecentGames = async (): Promise<Game[]> => {
 export const getCurrentPlayerId = (gameId: string): string | undefined => {
   let playerGames: PlayerGame[] = getPlayerGamesFromCache();
 
-  playerGames.forEach((g) => {
-    console.log(`TRACE : game ${JSON.stringify(g)}`)
-  })
-
   const game = playerGames.find((playerGame) => playerGame.gameId === gameId);
 
   return game && game.playerId;
@@ -120,6 +117,35 @@ export const addPlayerToGame = async (
 
   updatePlayerGames(gameId, newPlayer.id);
   await addPlayerToGameInStore(gameId, newPlayer);
+
+  return true;
+};
+
+export const deletePlayerFromGame = async (
+  gameId: string,
+  playerName: string
+): Promise<boolean> => {
+  const joiningGame = await getGameFromStore(gameId);
+
+  const players = await getPlayersFromStore(gameId);
+
+  let playerFound = false;
+  let playerInStorage = null;
+  players.forEach((player) => {
+    if (player.name === playerName) {
+      playerFound = true;
+      playerInStorage = player
+    }
+  });
+
+  if (!joiningGame) {
+    console.log('Game not found');
+    return false;
+  }
+  if (playerFound && playerInStorage) {
+    await deletePlayerFromGameInStore(gameId, playerInStorage);
+    return true;
+  }
 
   return true;
 };

@@ -1,6 +1,5 @@
 import { act, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import React from 'react';
 import reactRouter from 'react-router';
 import * as gameService from '../../../service/games';
 import * as playersService from '../../../service/players';
@@ -9,20 +8,11 @@ import { JoinGame } from './JoinGame';
 
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
+import * as firebase_api from '../../../repository/firebase'
 
 jest.mock('../../../service/players');
 jest.mock('../../../service/games');
 const mockHistoryPush = jest.fn();
-
-jest.mock('firebase', () => {
-  const auth = jest.fn();
-  const mAuth = { signInWithPopup: jest.fn() };
-  // @ts-ignore
-  auth.GoogleAuthProvider = jest.fn();
-  // @ts-ignore
-  auth.Auth = jest.fn(() => mAuth);
-  return { auth };
-});
 
 describe('JoinGame component', () => {
   beforeEach(() => {
@@ -42,9 +32,11 @@ describe('JoinGame component', () => {
     expect(screen.getByRole('button')).toBeInTheDocument();
     expect(screen.getByRole('button')).toHaveTextContent('Join');
   });
-  it('should be able to join a session', async () => {
+  it.only('should be able to join a session', async () => {
     jest.spyOn(playersService, 'addPlayerToGame').mockResolvedValue(true);
-    render(<JoinGame />);
+    jest.spyOn(firebase_api, "getPlayersFromStore").mockResolvedValue([])
+
+    render(<JoinGame playerName='Rock' joinGameId='gameId' />);
     const sessionID = screen.getByPlaceholderText('xyz...');
     userEvent.clear(sessionID);
     userEvent.type(sessionID, 'gameId');
@@ -54,13 +46,13 @@ describe('JoinGame component', () => {
 
     const joinButton = screen.getByText('Join');
 
+
     act(() => {
       userEvent.click(joinButton);
     });
 
-    expect(playersService.addPlayerToGame).toHaveBeenCalled();
-
-    expect(playersService.addPlayerToGame).toHaveBeenCalledWith('gameId', 'Rock');
+    await waitFor(() => expect(playersService.addPlayerToGame).toHaveBeenCalled());
+    await waitFor(() => expect(playersService.addPlayerToGame).toHaveBeenCalledWith('gameId', 'Rock'));
     await waitFor(() => expect(mockHistoryPush).toHaveBeenCalledWith('/game/gameId'));
   });
 
